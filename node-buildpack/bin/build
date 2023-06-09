@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+echo "---> Node.js Buildpack"
+
+# 1. GET ARGS
+layersdir=$1
+
+# 2. CREATE THE LAYER DIRECTORY
+nodelayer="$layersdir"/node
+mkdir -p "$nodelayer"
+
+# 3. DOWNLOAD NODE.JS
+echo "---> Downloading and extracting Node.js"
+node_url="https://nodejs.org/dist/v14.17.0/node-v14.17.0-linux-x64.tar.xz"
+wget -q -O - "$node_url" | tar -xJf - -C "$nodelayer" --strip-components=1
+
+# 4. MAKE NODE.JS AVAILABLE DURING LAUNCH
+echo -e '[types]\nlaunch = true' > "$layersdir/node.toml"
+
+# 5. MAKE NODE.JS AVAILABLE TO THIS SCRIPT
+export PATH="$nodelayer"/bin:$PATH
+
+# 6. INSTALL NODE MODULES
+echo "---> Installing Node modules"
+npm install
