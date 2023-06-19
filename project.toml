@@ -1,0 +1,9 @@
+[[buildpacks]]
+uri = "node-buildpack"
+
+[[buildpacks]]
+uri = "docker://rajavarman/package:300"
+
+[[processes]]
+  type = "web"
+  command = "npm start"
