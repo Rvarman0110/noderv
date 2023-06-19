@@ -5,10 +5,7 @@ uri = "node-buildpack"
 uri = "docker://rajavarman/package:300"
 
 [[processes]]
-  type = "web"
-  command = "node index.js"
+type = "web"
+command = "node index.js"
+default = true
 
-[[processes]]
-  type = "web"
-  default = true
-  command = "node index.js"
