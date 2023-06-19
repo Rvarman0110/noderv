@@ -6,4 +6,9 @@ uri = "docker://rajavarman/package:300"
 
 [[processes]]
   type = "web"
-  command = "npm start"
+  command = "node index.js"
+
+[[processes]]
+  type = "web"
+  default = true
+  command = "node index.js"
